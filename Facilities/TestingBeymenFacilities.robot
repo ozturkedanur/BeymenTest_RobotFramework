@@ -3,32 +3,11 @@ Library     SeleniumLibrary
 Library    XML
 Library    Collections
 Library    OperatingSystem
-Test Teardown       Close Browser
-
-*** Variables ***
-${beymen_url}       https://www.beymen.com/
-#homepage
-${home_page_load}       //img[@alt='Beymen']
-${search_text}      //input[@class='default-input o-header__search--input']
-${product_list}     //div[@id='productList']
-#poduct details page
-${product_title}        //a[@class='o-productDetail__brandLink']
-${product_description}        //span[@class='o-productDetail__description']
-${product_price}        //ins[@id='priceNew']
-${product_color}        //div[@class='m-colorsSlider__top']//label[@class='m-form__label m-variation__label']
-${add_cart_button}      //button[@id='addBasket']
-#sohopping cart page
-${cart_button}      //a[@class='o-header__userInfo--item bwi-cart-o -cart']
-${sale_price}      //span[@class='m-productPrice__salePrice']
-
+Resource        ../Resources/HomePage_Variables.robot
+Resource        ../Resources/Product_Details_Variables.robot
+Resource        ../Resources/Shopping_Cart_Variables.robot
 
 *** Keywords ***
-Validate homePage
-    [Arguments]  ${url}
-    Create Webdriver  Chrome  executable_path=C:/Users/EDA/Desktop/chromedriver
-    Go To  ${url}
-    Maximize Browser Window
-
 Wait Until Element Is Loceted in the Page
     Wait Until Element Is Visible    ${home_page_load}
 
@@ -85,28 +64,3 @@ Increase The Number of Products in The Cart
 Delete Product in Cart
     Click Button    xpath://button[@class='m-basket__remove btn-text']
     Wait Until Page Contains Element    //strong[contains(text(),'Sepetinizde Ürün Bulunmamaktadır')]
-
-
-*** Test Cases ***
-Login HomePage
-    Validate homePage  ${beymen_url}
-    Wait Until Element Is Loceted in the Page
-    Search for Products    şort
-    #Clear Element Text    ${search_text}
-    Press Keys   ${search_text}   CTRL+a   BACKSPACE
-    Search for Products    gömlek
-    Press Keys    ${search_text}    ENTER
-    Sleep    5s
-    Choose Product
-    Sleep    5s
-    Add to Shopping Cart
-    Sleep    5s
-    verification price
-    #Increase The Number of Products in The Cart
-    Delete Product in Cart
-
-
-
-
-
-
