@@ -5,6 +5,7 @@ Library    Collections
 Library    OperatingSystem
 Test Teardown       Close Browser
 
+
 *** Variables ***
 ${beymen_url}       https://www.beymen.com/
 #homepage
@@ -25,7 +26,7 @@ ${sale_price}      //span[@class='m-productPrice__salePrice']
 *** Keywords ***
 Validate homePage
     [Arguments]  ${url}
-    Create Webdriver  Chrome  executable_path=C:/Users/EDA/Desktop/chromedriver
+    Create Webdriver  Chrome  executable_path=Resources/chromedriver.exe
     Go To  ${url}
     Maximize Browser Window
 
